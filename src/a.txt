@@ -1,0 +1,68 @@
+import { use, useState } from "react";
+import { useRef } from "react";
+
+function App() {
+
+let ref = useRef(0);
+function handleClick(){
+  ref.current = ref.current + 1;
+  alert('a' + ref.current + 'times');
+}
+
+  const person ={
+    theme: {
+      backgroundColor: 'black',
+      color:'red'
+    }
+  }
+ 
+  return (
+    <div style={person.theme}>
+     
+     <button onClick={handleClick}>c</button>
+
+    </div>
+  );
+}
+
+export default App;
+----
+import { useReducer } from 'react';
+
+function reducer(state, action) {
+  if (action.type === 'incremented') {
+    return {
+      add: state.add + 1
+    };
+   
+   
+  }
+  throw Error('Unknown action.');
+}
+
+
+
+
+
+export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, { add: 0 });
+
+ 
+  return (
+    <>
+      <button onClick={() => {
+        dispatch({ type: 'incremented' })
+      }}>
+        Increment 
+      </button>
+      <p> {state.add}.</p>
+
+      <button onClick={() => {
+        dispatch({ type: 'decremented' })
+      }}>
+        decrement 
+      </button>
+      <p> {state.subtract}.</p>
+    </>
+  );
+}
